@@ -13,6 +13,7 @@ public class Main {
         rnd_array();
         sortA();
         createString();
+
     }
 
     // 2. Определить две константы `a` и `b` типа `Double`, присвоить им любые значения.
