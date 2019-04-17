@@ -7,12 +7,6 @@ public class Main {
 
     public static void main(String[] args) {
 
-        cons();
-        name();
-        f();
-        rnd_array();
-        sortA();
-        createString();
 
     }
 
