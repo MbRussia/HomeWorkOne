@@ -6,14 +6,9 @@ import java.util.Random;
 public class Main {
 
     public static void main(String[] args) {
-
-        cons();
-        name();
-        f();
-        rnd_array();
-        sortA();
-        createString();
-
+        City c = new City(10, 50);
+        //System.out.println(Arrays.toString(c.house()));
+        System.out.println(Arrays.toString(c.apartmetn()));
     }
 
     // 2. Определить две константы `a` и `b` типа `Double`, присвоить им любые значения.
@@ -35,6 +30,7 @@ public class Main {
         lastname = "Иванов";
 
         System.out.println("Full name " + firstName + " " + lastname);
+
         // лишняя пустая строка
     }
 
