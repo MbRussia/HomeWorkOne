@@ -5,13 +5,6 @@ import java.util.Random;
 
 public class City {
 
-    private int max, min;
-
-    public City(int max, int min) {
-        this.max = max;
-        this.min = min;
-    }
-
     public int rnd(int a, int b) {
         int deltaRnd = b - a;
         Random rnd = new Random();
