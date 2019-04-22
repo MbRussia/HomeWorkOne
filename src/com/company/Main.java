@@ -2,13 +2,29 @@ package com.company;
 
 import java.util.Arrays;
 import java.util.Random;
+import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args) {
-        City c = new City(10, 50);
-        //System.out.println(Arrays.toString(c.house()));
-        System.out.println(Arrays.toString(c.apartmetn()));
+        String[] mail = new String[10];
+        String[] id = new String[10];
+        mail[3] = "mail";
+        id[3] = "id";
+
+        Scanner scn = new Scanner(System.in);
+        System.out.println("Введите данные для авторизации");
+        String inputUser = scn.nextLine();
+        City city = new City();
+        if (city.auth(inputUser, mail, id) == 100) {
+            System.out.println("выводятся данные юзера");
+        } else {
+            System.out.println("Для регистрации введите");
+            String inMail = scn.nextLine();
+            System.out.println(city.checkInMial(inMail));
+        }
+
+
     }
 
     // 2. Определить две константы `a` и `b` типа `Double`, присвоить им любые значения.
