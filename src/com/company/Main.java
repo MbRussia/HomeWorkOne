@@ -1,7 +1,6 @@
 package com.company;
 
 import java.util.Arrays;
-import java.util.Date;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -9,13 +8,13 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Profile profile = new Profile("name", "mail", "location", new Date(), 1231231);
-        Profile profile1 = new Profile("name".toUpperCase(), "mail", "location", new Date(), 1231231);
-        Profile.profiles[0] = profile;
-        Profile.profiles[1] = profile1;
-        System.out.println(Arrays.toString(Profile.profiles));
-        Profile profile2 = Profile.profiles[0];
-        System.out.println(Arrays.toString(Profile.profiles));
+//        Profile profile = new Profile("name", "mail", "location", new Date(), 1231231);
+//        Profile profile1 = new Profile("name".toUpperCase(), "mail", "location", new Date(), 1231231);
+//        Profile.profiles[0] = profile;
+//        Profile.profiles[1] = profile1;
+//        System.out.println(Arrays.toString(Profile.profiles));
+//        Profile profile2 = Profile.profiles[0];
+//        System.out.println(Arrays.toString(Profile.profiles));
         boolean loop = true;
         while (loop) {
             System.out.println("Выбрать 1 для просмотра всех профайлов \n" +
