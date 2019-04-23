@@ -1,27 +1,24 @@
 package com.company;
 
-import java.util.Date;
-
 public class Profile {
 
-    public static Profile[] profiles = new Profile[2];
-    public String name;
-    public String mail;
-    public String location;
-    public Date date;
-    public int phone;
+    private static Profile[] profiles = new Profile[10];
+    private String name;
+    private String mail;
+    private String location;
+    private int phone;
 
-//    public void addProfile(Profile profile){
-//
-//    }
-
-    public Profile(String name, String mail, String location, Date date, int phone) {
+    public Profile(String name, String mail, String location, int phone) {
         this.name = name;
         this.mail = mail;
         this.location = location;
-        this.date = date;
         this.phone = phone;
     }
+
+    public static boolean checkPhone(String phone) {
+        return phone.matches("((8|\\+7)[\\- ]?)?(\\(?\\d{3}\\)?[\\- ]?)?[\\d\\- ]{7,10}$");
+    }
+
 
     @Override
     public String toString() {
@@ -29,20 +26,10 @@ public class Profile {
                 "name='" + name + '\'' +
                 ", mail='" + mail + '\'' +
                 ", location='" + location + '\'' +
-                ", date=" + date +
                 ", phone=" + phone +
                 '}';
     }
 
-    public int auth(String inputUser, String[] mail, String[] id) {
-        int authUser = 200;
-        for (int i = 0; i < mail.length; i++) {
-            if (inputUser.equals(mail[i]) || inputUser.equals(id[i])) {
-                authUser = 100;
-            }
-        }
-        return authUser;
-    }
 
     public boolean checkInMail(String mail) {
         return mail.matches("[a-zA-Z0-9]+@[a-zA-Z0-9]+\\.[a-zA-Z0-9]+");
@@ -50,6 +37,26 @@ public class Profile {
 
     public boolean passport(String passport) {
         return passport.matches("\\d{4}\\s\\d{6}");
+    }
+
+    public void addProfile(Profile profile) {
+
+    }
+
+    public String checkLocation(String location) {
+        return location.substring(0, 1).toUpperCase() + location.substring(1);
+    }
+
+    public String checkName(String name) {
+        name = name.substring(0, 1).toUpperCase() + name.substring(1);
+        char[] charName = name.toCharArray();
+
+        for (int i = 0; i < charName.length; i++) {
+            if (charName[i] == ' ') {
+                charName[i + 1] = Character.toUpperCase(charName[i + 1]);
+            }
+        }
+        return name = new String(charName);
     }
 
 }
