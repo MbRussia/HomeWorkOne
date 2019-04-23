@@ -1,31 +1,58 @@
 package com.company;
 
 import java.util.Arrays;
+import java.util.Date;
 import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args) {
-        String[] mail = new String[10];
-        String[] id = new String[10];
-        mail[3] = "mail";
-        id[3] = "id";
 
-        Scanner scn = new Scanner(System.in);
-        System.out.println("Введите данные для авторизации");
-        String inputUser = scn.nextLine();
-        City city = new City();
-        if (city.auth(inputUser, mail, id) == 100) {
-            System.out.println("выводятся данные юзера");
-        } else {
-            System.out.println("Для регистрации введите");
-            String inMail = scn.nextLine();
-            System.out.println(city.checkInMial(inMail));
+        Profile profile = new Profile("name", "mail", "location", new Date(), 1231231);
+        Profile profile1 = new Profile("name".toUpperCase(), "mail", "location", new Date(), 1231231);
+        Profile.profiles[0] = profile;
+        Profile.profiles[1] = profile1;
+        System.out.println(Arrays.toString(Profile.profiles));
+        Profile profile2 = Profile.profiles[0];
+        System.out.println(Arrays.toString(Profile.profiles));
+        boolean loop = true;
+        while (loop) {
+            System.out.println("Выбрать 1 для просмотра всех профайлов \n" +
+                    "Выбрать 2 для выхода из программы");
+            Scanner scn = new Scanner(System.in);
+            int input = scn.nextInt();
+            switch (input) {
+                case 1:
+                    System.out.println("все профайлы");
+                    for (Profile p : Profile.profiles) {
+                        System.out.println(p.toString());
+                    }
+                    break;
+                case 2:
+                    loop = false;
+
+            }
         }
 
-
     }
+
+//        String[] mail = new String[10];
+//        String[] id = new String[10];
+//        mail[3] = "mail";
+//        id[3] = "id";
+//
+//        Scanner scn = new Scanner(System.in);
+//        System.out.println("Введите данные для авторизации");
+//        String inputUser = scn.nextLine();
+//        City city = new City();
+//        if (city.auth(inputUser, mail, id) == 100) {
+//            System.out.println("выводятся данные юзера");
+//        } else {
+//            String passport = scn.nextLine();
+//            System.out.println(city.passport(passport));
+//        }
+
 
     // 2. Определить две константы `a` и `b` типа `Double`, присвоить им любые значения.
     // Вычислить среднее значение и сохранить результат в переменную `avarage`.

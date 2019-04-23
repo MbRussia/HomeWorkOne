@@ -14,8 +14,13 @@ public class City {
     }
 
     public boolean checkInMial(String mail) {
-        System.out.println("Введите Mail");
-        boolean result = mail.matches("^[_A-Za-z0-9-\\\\+]+(\\\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\\\.[A-Za-z0-9]+)*(\\\\.[A-Za-z]{2,})$;");
+
+        boolean result = mail.matches("[a-zA-Z0-9]+@[a-zA-Z0-9]+\\.[a-zA-Z0-9]+");
+        return result;
+    }
+
+    public boolean passport(String passport) {
+        boolean result = passport.matches("\\d{4}\\s\\d{6}");
 
         return result;
     }
