@@ -1,25 +1,43 @@
 package com.company;
 
+import java.util.Arrays;
+
 public class Profile {
 
-    private static Profile[] profiles = new Profile[10];
+    public static Profile[] profiles = new Profile[10];
     private String name;
     private String mail;
     private String location;
-    private int phone;
+    private long phone;
 
-    public Profile(String name, String mail, String location, int phone) {
-        this.name = name;
+    public Profile(String name, String mail, String location, long phone) {
+        this.name = checkName(name);
         this.mail = mail;
-        this.location = location;
-        this.phone = phone;
+        this.location = checkLocation(location);
+        this.phone = phone; // так как болеан нельзя вводить, нодо проверять наверное в свиче
     }
+
 
     public static boolean checkPhone(String phone) {
         return phone.matches("((8|\\+7)[\\- ]?)?(\\(?\\d{3}\\)?[\\- ]?)?[\\d\\- ]{7,10}$");
     }
 
+    public static void profileUser() {
+        for (Profile p : profiles) {
+            if (p != null) {
+                System.out.println(p.toString());
+            }
+        }
+    }
 
+    public static void changeUser(String mail, Profile profile) {
+        for (int i = 0; i < profiles.length; i++) {
+            if (profiles[i].mail.equals(mail)) {
+                profiles[i] = profile;
+                break;
+            }
+        }
+    }
     @Override
     public String toString() {
         return "Profile{" +
@@ -39,8 +57,14 @@ public class Profile {
         return passport.matches("\\d{4}\\s\\d{6}");
     }
 
-    public void addProfile(Profile profile) {
-
+    public static void addProfile(Profile profile) {
+        for (int i = 0; i < profiles.length; i++) {
+            if (profiles[i] == null) {
+                profiles[i] = profile;
+                break;
+            }
+        }
+        System.out.println(Arrays.toString(profiles));
     }
 
     public String checkLocation(String location) {
