@@ -1,74 +1,65 @@
 package com.company;
 
-import java.util.Scanner;
-
 public class Main {
 
     public static void main(String[] args) {
-//        Profile profile = new Profile(Profile.checkName("павлуша павлушевич"), "mail", "ростов", 112211);
-        //   Profile.addProfile(profile);
-//        Profile profile1 = new Profile("name".toUpperCase(), "mail", "location", 1231231);
-//        Profile.profiles[0] = profile;
-//        Profile.profiles[1] = profile1;
-//        System.out.println(Arrays.toString(Profile.profiles));
-//
-//        Profile profile2 = Profile.profiles[0];
-//        System.out.println(Arrays.toString(Profile.profiles));
 
-        boolean loop = true;
-        while (loop) {
-            System.out.println(
-                    "Выбрать 1 для просмотра всех профайлов \n" +
-                            "Выбрать 2 для регстрации нового профайла \n" +
-                            "Выбрать 3 для редактирвания профайла \n" +
-                            "Выбрать 4 для завершения программы");
+        Square.SquareText();
 
-            Scanner scn = new Scanner(System.in);
-
-            int input = scn.nextInt();
-
-            switch (input) {
-                case 1:
-                    System.out.println("Все профайлы");
-                    Profile.profileUser();
-                    break;
-                case 2:
-                    Scanner scn1 = new Scanner(System.in);
-                    System.out.println("Введите Фио");
-                    String inputNameUser = scn1.nextLine();
-                    System.out.println("Введите mail");
-                    String inpunUserMail = scn1.nextLine();
-                    System.out.println("Введите город проживания");
-                    String inputUserLocation = scn1.nextLine();
-                    System.out.println("Введите номер телефона");
-                    long inputUserPhone = scn1.nextLong();
-                    Profile profile = new Profile(inputNameUser, inpunUserMail, inputUserLocation, inputUserPhone);
-                    Profile.addProfile(profile);
-                    break;
-                case 3:
-                    Scanner scn2 = new Scanner(System.in);
-                    System.out.println("для изменения профиля введите mail");
-                    String mail = scn2.nextLine();
-                    System.out.println("Введите Фио");
-                    String cNameUser = scn2.nextLine();
-                    System.out.println("Введите mail");
-                    String cUserMail = scn2.nextLine();
-                    System.out.println("Введите город проживания");
-                    String cUserLocation = scn2.nextLine();
-                    System.out.println("Введите номер телефона");
-                    long cUserPhone = scn2.nextLong();
-                    Profile profileChange = new Profile(cNameUser, cUserMail, cUserLocation, cUserPhone);
-                    Profile.changeUser(mail, profileChange);
-                    break;
-                case 4:
-                    loop = false;
-                    break;
-
-            }
-        }
 
     }
-
+//        boolean loop = true;
+//        while (loop) {
+//            System.out.println(
+//                    "Выбрать 1 для просмотра всех профайлов \n" +
+//                            "Выбрать 2 для регстрации нового профайла \n" +
+//                            "Выбрать 3 для редактирвания профайла \n" +
+//                            "Выбрать 4 для завершения программы");
+//
+//            Scanner scn = new Scanner(System.in);
+//
+//            int input = scn.nextInt();
+//
+//            switch (input) {
+//                case 1:
+//                    System.out.println("Все профайлы");
+//                    Profile.profileUser();
+//                    break;
+//                case 2:
+//
+//                    System.out.println("Введите Фио");
+//                    String inputNameUser = scn.nextLine();
+//                    System.out.println("Введите mail");
+//                    String inpunUserMail = scn.nextLine();
+//                    System.out.println("Введите город проживания");
+//                    String inputUserLocation = scn.nextLine();
+//                    System.out.println("Введите номер телефона");
+//                    long inputUserPhone = scn.nextLong();
+//                    Profile profile = new Profile(inputNameUser, inpunUserMail, inputUserLocation, inputUserPhone);
+//                    Profile.addProfile(profile);
+//                    break;
+//                case 3:
+//
+//                    System.out.println("для изменения профиля введите mail");
+//                    String mail = scn.nextLine();
+//                    System.out.println("Введите Фио");
+//                    String cNameUser = scn.nextLine();
+//                    System.out.println("Введите mail");
+//                    String cUserMail = scn.nextLine();
+//                    System.out.println("Введите город проживания");
+//                    String cUserLocation = scn.nextLine();
+//                    System.out.println("Введите номер телефона");
+//                    long cUserPhone = scn.nextLong();
+//                    Profile profileChange = new Profile(cNameUser, cUserMail, cUserLocation, cUserPhone);
+//                    Profile.changeUser(mail, profileChange);
+//                    break;
+//                case 4:
+//                    loop = false;
+//                    break;
+//
+//            }
+//        }
+//
 //
 //    // 2. Определить две константы `a` и `b` типа `Double`, присвоить им любые значения.
 //    // Вычислить среднее значение и сохранить результат в переменную `avarage`.
@@ -144,4 +135,14 @@ public class Main {
 //        String word1 = new String(arr);
 //        System.out.println(word1);
 //    }
+    //        Profile profile = new Profile(Profile.checkName("павлуша павлушевич"), "mail", "ростов", 112211);
+    //   Profile.addProfile(profile);
+//        Profile profile1 = new Profile("name".toUpperCase(), "mail", "location", 1231231);
+//        Profile.profiles[0] = profile;
+//        Profile.profiles[1] = profile1;
+//        System.out.println(Arrays.toString(Profile.profiles));
+//
+//        Profile profile2 = Profile.profiles[0];
+//        System.out.println(Arrays.toString(Profile.profiles));
+
 }
