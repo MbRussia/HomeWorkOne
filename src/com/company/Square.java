@@ -14,35 +14,59 @@ public class Square {
                 "particularly for client-server web applications, with a reported 9 million developers. Java was originally developed by James Gosling " +
                 "at Sun Microsystems and released in 1995 as a core component of Sun Microsystems' Java platform.";
         char[] textArr = text.toCharArray();
-        int root = 0;
-        int x = 0;
-        int y = 1;
+        int root = 0;// количество символов
+        int x = 0; // извлечение корня большего отчисла
+        int y = 1; // количество слов
 
         while (root < textArr.length) {
             x++;
             root = x * x;
         }
+
         for (int i = 0; i < textArr.length; i++) {
             if (textArr[i] == ' ') {
                 y++;
-                continue;
             }
         }
-        char[] word = new char[y];
-        for (int i = 0; i < word.length; i++) {
+        System.out.println(x);
+        String[] stringWord = new String[y];
 
-            for (int j = 0; j < textArr.length; j++) {
+        int from = 0;
+        int k = 0;
+        for (int j = 0; j < textArr.length; j++) {
 
-                if (textArr[i] == ' ') {
-                    y++;
-                    continue;
+            if (textArr[j] == ' ') {
+                if (k == 0) {
+                    stringWord[k] = String.valueOf(Arrays.copyOfRange(textArr, from, j));
                 } else {
-
+                    stringWord[k] = String.valueOf(Arrays.copyOfRange(textArr, from + 1, j));
                 }
+                k++;
+                from = j;
+            }
+            if (k + 1 == y) {
+                stringWord[k] = String.valueOf(Arrays.copyOfRange(textArr, from + 1, textArr.length));
+            }
+        }
+        int[] numberWordCheck = new int[y];
+        for (int i = 0; i < stringWord.length; i++) {
+            numberWordCheck[i] = stringWord[i].length();
+        }
+        String[] suqareText = new String[x];
+        int z = 0;
+        for (int i = 0; i < stringWord.length; i++) {
+            if (i == 0) {
+                suqareText[z] = stringWord[i].concat(" " + stringWord[i + 1]);
             }
 
         }
-        System.out.println(Arrays.toString(word));
+
+
+        System.out.println(Arrays.toString(suqareText));
     }
+
+
 }
+
+
 

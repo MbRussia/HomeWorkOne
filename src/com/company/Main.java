@@ -1,64 +1,79 @@
 package com.company;
 
+import java.util.Scanner;
+
 public class Main {
+    private static final int PRINT_ALL_PROFILES = 1;
+    private static final int CREATE_USER = 2;
+    private static final int EDIT_USER = 3;
+    private static final int EXIT_USER = 4;
+    private static Scanner scn = new Scanner(System.in);
 
     public static void main(String[] args) {
 
         Square.SquareText();
 
-
     }
-//        boolean loop = true;
-//        while (loop) {
-//            System.out.println(
-//                    "Выбрать 1 для просмотра всех профайлов \n" +
-//                            "Выбрать 2 для регстрации нового профайла \n" +
-//                            "Выбрать 3 для редактирвания профайла \n" +
-//                            "Выбрать 4 для завершения программы");
-//
-//            Scanner scn = new Scanner(System.in);
-//
-//            int input = scn.nextInt();
-//
-//            switch (input) {
-//                case 1:
-//                    System.out.println("Все профайлы");
-//                    Profile.profileUser();
-//                    break;
-//                case 2:
-//
-//                    System.out.println("Введите Фио");
-//                    String inputNameUser = scn.nextLine();
-//                    System.out.println("Введите mail");
-//                    String inpunUserMail = scn.nextLine();
-//                    System.out.println("Введите город проживания");
-//                    String inputUserLocation = scn.nextLine();
-//                    System.out.println("Введите номер телефона");
-//                    long inputUserPhone = scn.nextLong();
-//                    Profile profile = new Profile(inputNameUser, inpunUserMail, inputUserLocation, inputUserPhone);
-//                    Profile.addProfile(profile);
-//                    break;
-//                case 3:
-//
-//                    System.out.println("для изменения профиля введите mail");
-//                    String mail = scn.nextLine();
-//                    System.out.println("Введите Фио");
-//                    String cNameUser = scn.nextLine();
-//                    System.out.println("Введите mail");
-//                    String cUserMail = scn.nextLine();
-//                    System.out.println("Введите город проживания");
-//                    String cUserLocation = scn.nextLine();
-//                    System.out.println("Введите номер телефона");
-//                    long cUserPhone = scn.nextLong();
-//                    Profile profileChange = new Profile(cNameUser, cUserMail, cUserLocation, cUserPhone);
-//                    Profile.changeUser(mail, profileChange);
-//                    break;
-//                case 4:
-//                    loop = false;
-//                    break;
-//
-//            }
-//        }
+
+    private static String getData(String message) {
+        System.out.println(message);
+        return scn.nextLine();
+    }
+
+    private static long getDataLong(String message) {
+        System.out.println(message);
+        return scn.nextLong();
+    }
+
+    public static void createProfile() {
+        boolean loop = true;
+        while (loop) {
+            System.out.println(
+                    "Выбрать 1 для просмотра всех профайлов \n" +
+                            "Выбрать 2 для регстрации нового профайла \n" +
+                            "Выбрать 3 для редактирвания профайла \n" +
+                            "Выбрать 4 для завершения программы");
+
+            int input = scn.nextInt();
+            switch (input) {
+
+                case PRINT_ALL_PROFILES:
+                    System.out.println("Все профайлы");
+                    Profile.profileUser();
+                    break;
+
+                case CREATE_USER:
+                    String inputNameUser = getData("Введите ФИО");
+                    String inpunUserMail = getData("Введите mail");
+                    String inputUserLocation = getData("Укажите город проживания");
+                    long inputUserPhone = getDataLong("Введите номер телефона");
+                    Profile profile = new Profile(inputNameUser, inpunUserMail, inputUserLocation, inputUserPhone);
+                    Profile.addProfile(profile);
+                    break;
+
+                case EDIT_USER:
+                    String mail = getData("Для изменения профиля введите mail");
+                    String cNameUser = getData("Введите ФИО");
+                    String cUserMail = getData("Введите e-Mail");
+                    String cUserLocation = getData("Введите город проживания");
+                    System.out.println("Введите номер телефона");
+                    long cUserPhone = getDataLong("Введите номер телефона");
+                    Profile profileChange = new Profile(cNameUser, cUserMail, cUserLocation, cUserPhone);
+                    Profile.changeUser(mail, profileChange);
+                    break;
+
+                case EXIT_USER:
+                    loop = false;
+                    break;
+
+                default:
+                    System.out.println("Вы выбрали вариант которго нет.");
+                    break;
+
+            }
+        }
+    }
+
 //
 //
 //    // 2. Определить две константы `a` и `b` типа `Double`, присвоить им любые значения.
