@@ -1,5 +1,7 @@
+
 package com.company;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Square {
@@ -13,60 +15,95 @@ public class Square {
                 "machine regardless of computer architecture. As of 2016, Java is one of the most popular programming languages in use, " +
                 "particularly for client-server web applications, with a reported 9 million developers. Java was originally developed by James Gosling " +
                 "at Sun Microsystems and released in 1995 as a core component of Sun Microsystems' Java platform.";
+        int root = 0;
+        int x = 0;
+
         char[] textArr = text.toCharArray();
-        int root = 0;// количество символов
-        int x = 0; // извлечение корня большего отчисла
-        int y = 1; // количество слов
-
-        while (root < textArr.length) {
-            x++;
-            root = x * x;
+        while (x < text.length()) {
+            root++;
+            x = root * root;
         }
 
-        for (int i = 0; i < textArr.length; i++) {
-            if (textArr[i] == ' ') {
-                y++;
+        System.out.println(Arrays.toString(stringWords(textArr)));
+
+        StringBuffer stringBuffer = new StringBuffer(root);
+
+        ArrayList<String> squareString = new ArrayList<>(root);
+
+        String[] stringWords = stringWords(textArr);
+        int i = 0;
+        for (String str : stringWords) {
+            if (i == 0 && (stringBuffer.length() + str.length()) <= root) {
+                stringBuffer.append(str);
+                i++;
+                continue;
             }
-        }
-        System.out.println(x);
-        String[] stringWord = new String[y];
+            if (i != 0 && (stringBuffer.length() + str.length()) <= root) {
+                stringBuffer.append(" " + str);
+            } else {
 
-        int from = 0;
-        int k = 0;
-        for (int j = 0; j < textArr.length; j++) {
-
-            if (textArr[j] == ' ') {
-                if (k == 0) {
-                    stringWord[k] = String.valueOf(Arrays.copyOfRange(textArr, from, j));
-                } else {
-                    stringWord[k] = String.valueOf(Arrays.copyOfRange(textArr, from + 1, j));
+                boolean loop = true;
+                int j = 0;
+                while (loop) {
+                    if (stringBuffer.length() == root) {
+                        loop = false;
+                    }
+                    if (stringBuffer.charAt(j) == ' ') {
+                        stringBuffer.insert(j, " ");
+                        j++;
+                    }
+                    if (j == stringBuffer.length() - 1) {
+                        j = 0;
+                    } else {
+                        j++;
+                    }
                 }
-                k++;
-                from = j;
-            }
-            if (k + 1 == y) {
-                stringWord[k] = String.valueOf(Arrays.copyOfRange(textArr, from + 1, textArr.length));
-            }
-        }
-        int[] numberWordCheck = new int[y];
-        for (int i = 0; i < stringWord.length; i++) {
-            numberWordCheck[i] = stringWord[i].length();
-        }
-        String[] suqareText = new String[x];
-        int z = 0;
-        for (int i = 0; i < stringWord.length; i++) {
-            if (i == 0) {
-                suqareText[z] = stringWord[i].concat(" " + stringWord[i + 1]);
+                squareString.add(stringBuffer.toString());
+
+                stringBuffer.delete(0, stringBuffer.length());
+
             }
 
         }
 
 
-        System.out.println(Arrays.toString(suqareText));
+        for (String s : squareString) {
+            System.out.println(s);
+        }
     }
 
 
+    private static String[] stringWords(char[] textArr) {
+
+        String[] stringWords = new String[numWords(textArr)];
+        int from = 0;
+        int key = 0;
+        for (int i = 0; i < textArr.length; i++) {
+            if (textArr[i] == ' ') {
+                if (key == 0) {
+                    stringWords[key] = String.valueOf(Arrays.copyOfRange(textArr, from, i));
+                } else {
+                    stringWords[key] = String.valueOf(Arrays.copyOfRange(textArr, from + 1, i));
+                }
+                key++;
+                from = i;
+                if (key + 1 == numWords(textArr)) {
+                    stringWords[key] = String.valueOf(Arrays.copyOfRange(textArr, from, textArr.length));
+                }
+            }
+        }
+        return stringWords;
+    }
+
+    private static int numWords(char[] arr) {
+        int numWords = 1;
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] == ' ') {
+                numWords++;
+            }
+        }
+        return numWords;
+    }
+
 }
-
-
 

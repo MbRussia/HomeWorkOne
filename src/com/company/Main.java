@@ -13,6 +13,7 @@ public class Main {
 
         Square.SquareText();
 
+
     }
 
     private static String getData(String message) {
