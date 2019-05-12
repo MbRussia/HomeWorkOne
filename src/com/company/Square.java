@@ -23,7 +23,7 @@ public class Square {
             root++;
             x = root * root;
         }
-
+        System.out.println(root);
         System.out.println(Arrays.toString(stringWords(textArr)));
 
         StringBuffer stringBuffer = new StringBuffer(root);
@@ -31,45 +31,54 @@ public class Square {
         ArrayList<String> squareString = new ArrayList<>(root);
 
         String[] stringWords = stringWords(textArr);
-        int i = 0;
-        for (String str : stringWords) {
-            if (i == 0 && (stringBuffer.length() + str.length()) <= root) {
-                stringBuffer.append(str);
-                i++;
+        int z = 0;
+        for (int i = 0; i < stringWords.length; i++) {
+
+            if (z == 0 && (stringBuffer.length() + stringWords[i].length()) <= root) {
+                stringBuffer.append(stringWords[i]);
+                z++;
                 continue;
             }
-            if (i != 0 && (stringBuffer.length() + str.length()) <= root) {
-                stringBuffer.append(" " + str);
+            if ((stringBuffer.length() + stringWords[i].length()) <= root) {
+                stringBuffer.append(" " + stringWords[i]);
             } else {
+                if (stringBuffer.length() == root) {
+                    squareString.add(stringBuffer.toString());
 
-                boolean loop = true;
-                int j = 0;
-                while (loop) {
-                    if (stringBuffer.length() == root) {
-                        loop = false;
+                    stringBuffer.delete(0, stringBuffer.length());
+                    z = 0;
+                } else {
+                    boolean loop = true;
+                    int j = 0;
+                    while (loop) {
+                        if (stringBuffer.length() == root) {
+                            loop = false;
+                        }
+                        if (stringBuffer.charAt(j) == ' ') {
+                            stringBuffer.insert(j, " ");
+                            j++;
+                        }
+                        if (j == stringBuffer.length() - 1) {
+                            j = 0;
+                        } else {
+                            j++;
+                        }
                     }
-                    if (stringBuffer.charAt(j) == ' ') {
-                        stringBuffer.insert(j, " ");
-                        j++;
-                    }
-                    if (j == stringBuffer.length() - 1) {
-                        j = 0;
-                    } else {
-                        j++;
-                    }
+                    squareString.add(stringBuffer.toString());
+
+                    stringBuffer.delete(0, stringBuffer.length());
+                    i--;
+                    z = 0;
                 }
-                squareString.add(stringBuffer.toString());
-
-                stringBuffer.delete(0, stringBuffer.length());
 
             }
 
         }
-
 
         for (String s : squareString) {
             System.out.println(s);
         }
+
     }
 
 
@@ -106,4 +115,3 @@ public class Square {
     }
 
 }
-

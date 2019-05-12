@@ -1,18 +1,23 @@
 package com.company.ice_cream_shop;
 
+import com.company.ice_cream_shop.topping.CupType;
 import com.company.ice_cream_shop.topping.IceCreamType;
 import com.company.ice_cream_shop.topping.ToppingType;
 
 public interface IceCream {
-    String getIceCream();
+    String getIceCreamType();
 
     String getTopping();
 
-    String fullPrice();
+    int fullPrice();
+
+    String getCupType();
+
+    void setCupType(CupType cupType);
 
     void setIceCreamType(IceCreamType iceCreamType);
 
-    void addTopping(ToppingType topping);
+    boolean addTopping(ToppingType topping);
 
 
 }

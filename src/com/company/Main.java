@@ -1,5 +1,12 @@
 package com.company;
 
+import com.company.ice_cream_shop.ExtraIceCream;
+import com.company.ice_cream_shop.StandartIceCream;
+import com.company.ice_cream_shop.SurpriseIceCream;
+import com.company.ice_cream_shop.topping.CupType;
+import com.company.ice_cream_shop.topping.IceCreamType;
+import com.company.ice_cream_shop.topping.ToppingType;
+
 import java.util.Scanner;
 
 public class Main {
@@ -11,9 +18,20 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Square.SquareText();
-
-
+        StandartIceCream iceCream = new StandartIceCream();
+        SurpriseIceCream s = new SurpriseIceCream();
+        ExtraIceCream e = new ExtraIceCream();
+        e.addTopping(ToppingType.FRUCTS);
+        e.setCupType(CupType.HORN);
+        e.setIceCreamType(IceCreamType.CHOCOLATE);
+        System.out.println(e.fullPrice());
+        s.addTopping(ToppingType.FRUCTS);
+        iceCream.setCupType(CupType.HORN);
+        iceCream.addTopping(ToppingType.CHOCOLATE);
+        iceCream.addTopping(ToppingType.FRUCTS);
+        iceCream.setIceCreamType(IceCreamType.CHOCOLATE);
+        System.out.println(iceCream.fullPrice());
+        System.out.println(iceCream);
     }
 
     private static String getData(String message) {
