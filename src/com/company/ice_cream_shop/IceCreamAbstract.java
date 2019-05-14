@@ -1,5 +1,6 @@
 package com.company.ice_cream_shop;
 
+import com.company.ice_cream_shop.exceptions.ToppingException;
 import com.company.ice_cream_shop.topping.CupType;
 import com.company.ice_cream_shop.topping.IceCreamType;
 import com.company.ice_cream_shop.topping.ToppingType;
@@ -12,12 +13,12 @@ public abstract class IceCreamAbstract implements IceCream {
     protected CupType cupType;
 
     @Override
-    public boolean addTopping(ToppingType topping) {
+    public void addTopping(ToppingType topping) throws ToppingException {
         if (toppings.size() < 4) {
             toppings.add(topping);
-            return true;
+        } else {
+            throw new ToppingException();
         }
-        return false;
     }
 
     @Override

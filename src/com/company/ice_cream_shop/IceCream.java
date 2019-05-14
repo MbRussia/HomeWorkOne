@@ -1,8 +1,11 @@
 package com.company.ice_cream_shop;
 
+import com.company.ice_cream_shop.exceptions.ToppingException;
 import com.company.ice_cream_shop.topping.CupType;
 import com.company.ice_cream_shop.topping.IceCreamType;
 import com.company.ice_cream_shop.topping.ToppingType;
+
+import java.sql.SQLException;
 
 public interface IceCream {
     String getIceCreamType();
@@ -17,7 +20,7 @@ public interface IceCream {
 
     void setIceCreamType(IceCreamType iceCreamType);
 
-    boolean addTopping(ToppingType topping);
+    void addTopping(ToppingType topping) throws ToppingException, SQLException;
 
 
 }

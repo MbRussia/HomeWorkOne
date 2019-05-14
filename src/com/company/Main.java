@@ -3,6 +3,7 @@ package com.company;
 import com.company.ice_cream_shop.ExtraIceCream;
 import com.company.ice_cream_shop.StandartIceCream;
 import com.company.ice_cream_shop.SurpriseIceCream;
+import com.company.ice_cream_shop.exceptions.ToppingException;
 import com.company.ice_cream_shop.topping.CupType;
 import com.company.ice_cream_shop.topping.IceCreamType;
 import com.company.ice_cream_shop.topping.ToppingType;
@@ -21,14 +22,25 @@ public class Main {
         StandartIceCream iceCream = new StandartIceCream();
         SurpriseIceCream s = new SurpriseIceCream();
         ExtraIceCream e = new ExtraIceCream();
-        e.addTopping(ToppingType.FRUCTS);
+
+        try {
+            s.addTopping(ToppingType.FRUCTS);
+            e.addTopping(ToppingType.FRUCTS);
+            iceCream.addTopping(ToppingType.FRUCTS);
+            iceCream.addTopping(ToppingType.CHOCOLATE);
+            iceCream.addTopping(ToppingType.FRUCTS);
+            iceCream.addTopping(ToppingType.FRUCTS);
+            iceCream.addTopping(ToppingType.FRUCTS);
+            iceCream.addTopping(ToppingType.FRUCTS);
+            iceCream.addTopping(ToppingType.FRUCTS);
+        } catch (ToppingException e1) {
+            System.out.println(e1.getMessage());
+        }
+
         e.setCupType(CupType.HORN);
         e.setIceCreamType(IceCreamType.CHOCOLATE);
         System.out.println(e.fullPrice());
-        s.addTopping(ToppingType.FRUCTS);
         iceCream.setCupType(CupType.HORN);
-        iceCream.addTopping(ToppingType.CHOCOLATE);
-        iceCream.addTopping(ToppingType.FRUCTS);
         iceCream.setIceCreamType(IceCreamType.CHOCOLATE);
         System.out.println(iceCream.fullPrice());
         System.out.println(iceCream);
