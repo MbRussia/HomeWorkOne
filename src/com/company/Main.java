@@ -8,6 +8,10 @@ import com.company.ice_cream_shop.topping.CupType;
 import com.company.ice_cream_shop.topping.IceCreamType;
 import com.company.ice_cream_shop.topping.ToppingType;
 
+import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Scanner;
 
 public class Main {
@@ -18,7 +22,48 @@ public class Main {
     private static Scanner scn = new Scanner(System.in);
 
     public static void main(String[] args) {
+        File file = new File("file.txt");
+        System.out.println(file.getAbsoluteFile());
 
+        try (FileWriter writer = new FileWriter(file);
+             FileReader reader = new FileReader(file)) {
+            writer.write("Hello World! Привет, Паша!");
+            writer.flush();
+
+            int c;
+            while ((c = reader.read()) != -1) {
+                System.out.print((char) c);
+            }
+
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+
+        System.out.println();
+
+        try {
+            Files.lines(Paths.get("file.txt"), StandardCharsets.UTF_8).forEach(System.out::println);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        try (FileInputStream fileInputStream = new FileInputStream(file);
+             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(fileInputStream))) {
+
+            String str;
+            while ((str = bufferedReader.readLine()) != null) {
+                System.out.println(str);
+            }
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    private static void createIceCream() {
         StandartIceCream iceCream = new StandartIceCream();
         SurpriseIceCream s = new SurpriseIceCream();
         ExtraIceCream e = new ExtraIceCream();
