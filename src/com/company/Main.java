@@ -1,12 +1,13 @@
 package com.company;
 
 import com.company.ice_cream_shop.StandartIceCream;
+import com.company.ice_cream_shop.TextOutput;
 import com.company.ice_cream_shop.topping.CupType;
 
 import java.util.Scanner;
 
 public class Main {
-    private static final int EXIT_BUY_ICECREAME = 5;
+    private static final int EXIT_BUY_ICE_CREAM = 5;
     private static final int SELECT_ICE_CREAM = 0;
     private static Scanner scn = new Scanner(System.in);
 
@@ -39,18 +40,18 @@ public class Main {
                 case SELECT_ICE_CREAM:
                     StandartIceCream standartIceCream = new StandartIceCream();
 
-                    String cup = getIceCreamData("Выберите Стаканчик из списка:\n" + getCupTypes());
+                    String cup = getIceCreamData(TextOutput.getMessage(TextOutput.SELECT_CUP) + getCupTypes());
 
                     standartIceCream.setCupType(CupType.valueOf(cup));
 
                     break;
 
-                case EXIT_BUY_ICECREAME:
+                case EXIT_BUY_ICE_CREAM:
                     loop = false;
                     break;
 
                 default:
-                    System.out.println("Вы не выбрали ни одни вариант");
+                    System.out.println(TextOutput.getMessage(TextOutput.DEFAULT));
                     break;
             }
 

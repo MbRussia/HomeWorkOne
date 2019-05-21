@@ -1,14 +1,17 @@
 package com.company.ice_cream_shop;
 
-public class TextOutput {
-    private String message;
+public enum TextOutput {
+    DEFAULT, SELECT_CUP;
 
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
+    public static String getMessage(TextOutput type) {
+        switch (type) {
+            case DEFAULT:
+                return "Вы не выбрали ни одни вариант";
+            case SELECT_CUP:
+                return "Выберите Стаканчик из списка:\n";
+            default:
+                return "OLOLO";
+        }
     }
 
 }
