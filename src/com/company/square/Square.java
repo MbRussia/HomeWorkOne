@@ -1,12 +1,10 @@
 
-package com.company;
+package com.company.square;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Square {
-
-
     public static void SquareText() {
         String text = "Java is a general-purpose computer programming language that " +
                 "is concurrent, class-based, object-oriented, and specifically designed to have as few implementation dependencies as possible. " +

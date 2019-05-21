@@ -1,4 +1,4 @@
-package com.company;
+package com.company.profile;
 
 import java.util.Arrays;
 
@@ -40,7 +40,7 @@ public class Profile {
     }
     @Override
     public String toString() {
-        return "Profile{" +
+        return "profile{" +
                 "name='" + name + '\'' +
                 ", mail='" + mail + '\'' +
                 ", location='" + location + '\'' +
