@@ -50,7 +50,7 @@ public class Main {
                     break;
 
                 default:
-                    getIceCreamData("Вы не выбрали ни одни вариант");
+                    System.out.println("Вы не выбрали ни одни вариант");
                     break;
             }
 
