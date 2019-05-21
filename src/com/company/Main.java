@@ -1,97 +1,132 @@
 package com.company;
 
-import com.company.ice_cream_shop.ExtraIceCream;
 import com.company.ice_cream_shop.StandartIceCream;
-import com.company.ice_cream_shop.SurpriseIceCream;
 import com.company.ice_cream_shop.topping.CupType;
-import com.company.ice_cream_shop.topping.IceCreamType;
-import com.company.ice_cream_shop.topping.ToppingType;
 
 import java.util.Scanner;
 
 public class Main {
-    private static final int PRINT_ALL_PROFILES = 1;
-    private static final int CREATE_USER = 2;
-    private static final int EDIT_USER = 3;
-    private static final int EXIT_USER = 4;
+    //    private static final int PRINT_ALL_PROFILES = 1;
+//    private static final int CREATE_USER = 2;
+//    private static final int EDIT_USER = 3;
+//    private static final int EXIT_USER = 4;
+    private static final int EXIT_BUY_ICECREAME = 5;
+    private static final int SELECT_ICE_CREAM = 0;
     private static Scanner scn = new Scanner(System.in);
 
+
     public static void main(String[] args) {
-
-        StandartIceCream iceCream = new StandartIceCream();
-        SurpriseIceCream s = new SurpriseIceCream();
-        ExtraIceCream e = new ExtraIceCream();
-        e.addTopping(ToppingType.FRUCTS);
-        e.setCupType(CupType.HORN);
-        e.setIceCreamType(IceCreamType.CHOCOLATE);
-        System.out.println(e.fullPrice());
-        s.addTopping(ToppingType.FRUCTS);
-        iceCream.setCupType(CupType.HORN);
-        iceCream.addTopping(ToppingType.CHOCOLATE);
-        iceCream.addTopping(ToppingType.FRUCTS);
-        iceCream.setIceCreamType(IceCreamType.CHOCOLATE);
-        System.out.println(iceCream.fullPrice());
-        System.out.println(iceCream);
-    }
-
-    private static String getData(String message) {
-        System.out.println(message);
-        return scn.nextLine();
-    }
-
-    private static long getDataLong(String message) {
-        System.out.println(message);
-        return scn.nextLong();
-    }
-
-    public static void createProfile() {
         boolean loop = true;
+        System.out.println("Чтобы произвести покупку мороженного введите - 0\n" +
+                "Для выхода нажмите - 5");
+
         while (loop) {
-            System.out.println(
-                    "Выбрать 1 для просмотра всех профайлов \n" +
-                            "Выбрать 2 для регстрации нового профайла \n" +
-                            "Выбрать 3 для редактирвания профайла \n" +
-                            "Выбрать 4 для завершения программы");
 
             int input = scn.nextInt();
             switch (input) {
+                case SELECT_ICE_CREAM:
+                    System.out.println("Выберите Стаканчик из списка");
+                    StandartIceCream standartIceCream = new StandartIceCream();
+                    for (CupType type : CupType.values()) {
+                        System.out.println(type);
+                    }
+                    String f = scn.nextLine();
+                    standartIceCream.setCupType(CupType.valueOf(f));
 
-                case PRINT_ALL_PROFILES:
-                    System.out.println("Все профайлы");
-                    Profile.profileUser();
+
                     break;
 
-                case CREATE_USER:
-                    String inputNameUser = getData("Введите ФИО");
-                    String inpunUserMail = getData("Введите mail");
-                    String inputUserLocation = getData("Укажите город проживания");
-                    long inputUserPhone = getDataLong("Введите номер телефона");
-                    Profile profile = new Profile(inputNameUser, inpunUserMail, inputUserLocation, inputUserPhone);
-                    Profile.addProfile(profile);
-                    break;
-
-                case EDIT_USER:
-                    String mail = getData("Для изменения профиля введите mail");
-                    String cNameUser = getData("Введите ФИО");
-                    String cUserMail = getData("Введите e-Mail");
-                    String cUserLocation = getData("Введите город проживания");
-                    System.out.println("Введите номер телефона");
-                    long cUserPhone = getDataLong("Введите номер телефона");
-                    Profile profileChange = new Profile(cNameUser, cUserMail, cUserLocation, cUserPhone);
-                    Profile.changeUser(mail, profileChange);
-                    break;
-
-                case EXIT_USER:
+                case EXIT_BUY_ICECREAME:
                     loop = false;
                     break;
 
                 default:
-                    System.out.println("Вы выбрали вариант которго нет.");
+                    getIceCreameData("Вы не выбрали ни одни вариант");
                     break;
-
             }
+
         }
+
+//        StandartIceCream iceCream = new StandartIceCream();
+//        SurpriseIceCream s = new SurpriseIceCream();
+//        ExtraIceCream e = new ExtraIceCream();
+//        e.addTopping(ToppingType.FRUCTS);
+//        e.setCupType(CupType.HORN);
+//        e.setIceCreamType(IceCreamType.CHOCOLATE);
+//        System.out.println(e.fullPrice());
+//        s.addTopping(ToppingType.FRUCTS);
+//        iceCream.setCupType(CupType.HORN);
+//        iceCream.addTopping(ToppingType.CHOCOLATE);
+//        iceCream.addTopping(ToppingType.FRUCTS);
+//        iceCream.setIceCreamType(IceCreamType.CHOCOLATE);
+//        System.out.println(iceCream.fullPrice());
+//        System.out.println(iceCream);
     }
+
+    private static String getIceCreameData(String message) {
+        System.out.println(message);
+        return scn.nextLine();
+    }
+
+
+//    private static String getData(String message) {
+//        System.out.println(message);
+//        return scn.nextLine();
+//    }
+//
+//    private static long getDataLong(String message) {
+//        System.out.println(message);
+//        return scn.nextLong();
+//    }
+//
+//    public static void createProfile() {
+//        boolean loop = true;
+//        while (loop) {
+//            System.out.println(
+//                    "Выбрать 1 для просмотра всех профайлов \n" +
+//                            "Выбрать 2 для регстрации нового профайла \n" +
+//                            "Выбрать 3 для редактирвания профайла \n" +
+//                            "Выбрать 4 для завершения программы");
+//
+//            int input = scn.nextInt();
+//            switch (input) {
+//
+//                case PRINT_ALL_PROFILES:
+//                    System.out.println("Все профайлы");
+//                    Profile.profileUser();
+//                    break;
+//
+//                case CREATE_USER:
+//                    String inputNameUser = getData("Введите ФИО");
+//                    String inpunUserMail = getData("Введите mail");
+//                    String inputUserLocation = getData("Укажите город проживания");
+//                    long inputUserPhone = getDataLong("Введите номер телефона");
+//                    Profile profile = new Profile(inputNameUser, inpunUserMail, inputUserLocation, inputUserPhone);
+//                    Profile.addProfile(profile);
+//                    break;
+//
+//                case EDIT_USER:
+//                    String mail = getData("Для изменения профиля введите mail");
+//                    String cNameUser = getData("Введите ФИО");
+//                    String cUserMail = getData("Введите e-Mail");
+//                    String cUserLocation = getData("Введите город проживания");
+//                    System.out.println("Введите номер телефона");
+//                    long cUserPhone = getDataLong("Введите номер телефона");
+//                    Profile profileChange = new Profile(cNameUser, cUserMail, cUserLocation, cUserPhone);
+//                    Profile.changeUser(mail, profileChange);
+//                    break;
+//
+//                case EXIT_USER:
+//                    loop = false;
+//                    break;
+//
+//                default:
+//                    System.out.println("Вы выбрали вариант которго нет.");
+//                    break;
+//
+//            }
+//        }
+//    }
 
 //
 //

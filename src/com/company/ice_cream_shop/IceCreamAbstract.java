@@ -11,6 +11,7 @@ public abstract class IceCreamAbstract implements IceCream {
     protected IceCreamType iceCreamType;
     protected CupType cupType;
 
+
     @Override
     public boolean addTopping(ToppingType topping) {
         if (toppings.size() < 4) {
@@ -53,7 +54,8 @@ public abstract class IceCreamAbstract implements IceCream {
 
     @Override
     public int fullPrice() {
-        return cupType.getPrice() + iceCreamType.getPrice();
+        return cupType.getPrice() + iceCreamType.getPrice() + toppings.size();
         //return "Итоговая цена: "+(cupType.getPrice()+iceCreamType.getPrice());
     }
+
 }
