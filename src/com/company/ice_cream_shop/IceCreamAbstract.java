@@ -33,6 +33,7 @@ public abstract class IceCreamAbstract implements IceCream {
     @Override
     public void setCupType(CupType cupType) {
         this.cupType = cupType;
+        return;
     }
 
     @Override
