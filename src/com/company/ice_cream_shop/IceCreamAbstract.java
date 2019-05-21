@@ -50,12 +50,12 @@ public abstract class IceCreamAbstract implements IceCream {
 
     @Override
     public String getTopping() { // решить, что с ним сделать
-        return null;
+        return toppings.toString();
     }
 
     @Override
     public int fullPrice() {
-        return cupType.getPrice() + iceCreamType.getPrice() + toppings.size();
+        return cupType.getPrice() + iceCreamType.getPrice();
         //return "Итоговая цена: "+(cupType.getPrice()+iceCreamType.getPrice());
     }
 

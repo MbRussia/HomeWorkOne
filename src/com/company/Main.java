@@ -2,7 +2,10 @@ package com.company;
 
 import com.company.ice_cream_shop.StandartIceCream;
 import com.company.ice_cream_shop.TextOutput;
+import com.company.ice_cream_shop.exceptions.ToppingException;
 import com.company.ice_cream_shop.topping.CupType;
+import com.company.ice_cream_shop.topping.IceCreamType;
+import com.company.ice_cream_shop.topping.ToppingType;
 
 import java.util.Scanner;
 
@@ -12,9 +15,16 @@ public class Main {
     private static Scanner scn = new Scanner(System.in);
 
 
-    private static String getIceCreamData(String message) {
+    private static String getData(String message) {
         System.out.println(message);
         return scn.nextLine();
+    }
+
+    private static int getIntData(String message) {
+        System.out.println(message);
+        int i = scn.nextInt();
+        scn.nextLine();
+        return i;
     }
 
     private static String getCupTypes() {
@@ -30,20 +40,71 @@ public class Main {
     public static void main(String[] args) {
         boolean loop = true;
         while (loop) {
-            System.out.println("Чтобы произвести покупку мороженного введите - 0\n" +
+            int input = getIntData("Чтобы произвести покупку мороженного введите - 0\n" +
                     "Для выхода нажмите - 5");
-
-            int input = scn.nextInt();
-            scn.nextLine();
 
             switch (input) {
                 case SELECT_ICE_CREAM:
                     StandartIceCream standartIceCream = new StandartIceCream();
 
-                    String cup = getIceCreamData(TextOutput.getMessage(TextOutput.SELECT_CUP) + getCupTypes());
+                    String cup = getData(TextOutput.getMessage(TextOutput.SELECT_CUP) + getCupTypes());
 
                     standartIceCream.setCupType(CupType.valueOf(cup));
 
+                    boolean loopSelectCreamType = true;
+                    while (loopSelectCreamType) {
+
+                        input = getIntData("Какой тип мороженного ?\n 1 - Ванильное \n 2 - Шоколадное \n 0 - Выход");
+
+                        switch (input) {
+                            case 1:
+                                standartIceCream.setIceCreamType(IceCreamType.CREAMY);
+                                loopSelectCreamType = false;
+                                break;
+                            case 2:
+                                standartIceCream.setIceCreamType(IceCreamType.CHOCOLATE);
+                                loopSelectCreamType = false;
+                                break;
+                            case 0:
+                                loopSelectCreamType = false;
+                                break;
+                            default:
+                                System.out.println("Не правильное значение");
+                                break;
+
+                        }
+                    }
+
+                    boolean loopSelectToppings = true;
+                    while (loopSelectToppings) {
+                        input = getIntData("Какой тип топпинга ?\n 1 - Шоколад \n 2 - Орехи \n 3 - Фрукты \n0 - Выход");
+                        try {
+                            switch (input) {
+                                case 1:
+                                    standartIceCream.addTopping(ToppingType.CHOCOLATE);
+                                    break;
+                                case 2:
+                                    standartIceCream.addTopping(ToppingType.NUT);
+                                    break;
+                                case 3:
+                                    standartIceCream.addTopping(ToppingType.FRUCTS);
+                                    break;
+                                case 0:
+                                    loopSelectToppings = false;
+                                    break;
+                                default:
+
+                            }
+
+
+                            System.out.println(standartIceCream.getTopping());
+                        } catch (ToppingException e) {
+                            System.out.println(e.getMessage());
+                            loopSelectToppings = false;
+                        }
+                    }
+
+                    System.out.println(standartIceCream.fullPrice());
                     break;
 
                 case EXIT_BUY_ICE_CREAM:
