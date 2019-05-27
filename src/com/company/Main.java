@@ -1,6 +1,7 @@
 package com.company;
 
 import com.company.ice_cream_shop.StandartIceCream;
+import com.company.ice_cream_shop.SurpriseIceCream;
 import com.company.ice_cream_shop.TextOutput;
 import com.company.ice_cream_shop.exceptions.ToppingException;
 import com.company.ice_cream_shop.topping.CupType;
@@ -8,6 +9,7 @@ import com.company.ice_cream_shop.topping.IceCreamType;
 import com.company.ice_cream_shop.topping.ToppingType;
 
 import java.util.InputMismatchException;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
@@ -46,7 +48,7 @@ public class Main {
         return cupTypes.toString();
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ToppingException {
 
         while (loop) {
             int input = getIntData("Чтобы произвести покупку мороженного введите - 0\n" +
@@ -79,8 +81,51 @@ public class Main {
 
     }
 
-    private static void createSurpriseIceCream() {
-
+    private static void createSurpriseIceCream() throws ToppingException {
+        Random rnd = new Random();
+        SurpriseIceCream surpriseIceCream = new SurpriseIceCream();
+        switch (rnd.nextInt(CupType.values().length)) {
+            case 0:
+                surpriseIceCream.setCupType(CupType.HORN);
+                break;
+            case 1:
+                surpriseIceCream.setCupType(CupType.CUP);
+                break;
+            default:
+                break;
+        }
+        switch (rnd.nextInt(IceCreamType.values().length)) {
+            case 0:
+                surpriseIceCream.setIceCreamType(IceCreamType.CHOCOLATE);
+                break;
+            case 1:
+                surpriseIceCream.setIceCreamType(IceCreamType.CREAMY);
+                break;
+            default:
+                break;
+        }
+        int toppingTypeRandom = 0;
+        while (toppingTypeRandom < 2) {
+            switch (rnd.nextInt(ToppingType.values().length)) {
+                case 0:
+                    surpriseIceCream.addTopping(ToppingType.FRUCTS);
+                    break;
+                case 1:
+                    surpriseIceCream.addTopping(ToppingType.NUT);
+                    break;
+                case 2:
+                    surpriseIceCream.addTopping(ToppingType.CHOCOLATE);
+                    break;
+                default:
+                    break;
+            }
+            toppingTypeRandom++;
+        }
+        System.out.println("Вы выбрали мороженное: \n" +
+                "Eмкость - " + surpriseIceCream.getCupType() + "\n" +
+                "Mороженное - " + surpriseIceCream.getIceCreamType() + "\n" +
+                "Топпинг - " + surpriseIceCream.getTopping());
+        System.out.println("Сумма покупки составляет " + surpriseIceCream.fullPrice());
     }
 
     private static void createExtraIceCream() {
