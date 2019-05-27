@@ -4,7 +4,6 @@ public enum IceCreamType {
     CHOCOLATE, CREAMY;
 
     public int getPrice() {
-        System.out.println(this);
         switch (this) {
             case CREAMY:
                 return 10;

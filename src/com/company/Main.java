@@ -91,13 +91,30 @@ public class Main {
     private static void createStandardIceCream() {
         int input;
 
-
         StandartIceCream standartIceCream = new StandartIceCream();
-
-        String cup = getData(TextOutput.getMessage(TextOutput.SELECT_CUP) + getCupTypes());
-
-        standartIceCream.setCupType(CupType.valueOf(cup));
-
+        boolean loopSelectCupIceCream = true;
+        while (loopSelectCupIceCream) {
+            input = getIntData("Выберите емкость из списка: \n" +
+                    "1 - Стаканчик\n" +
+                    "2 - Рожок\n" +
+                    "0 - Выход");
+            switch (input) {
+                case 1:
+                    standartIceCream.setCupType(CupType.CUP);
+                    loopSelectCupIceCream = false;
+                    break;
+                case 2:
+                    standartIceCream.setCupType(CupType.HORN);
+                    loopSelectCupIceCream = false;
+                    break;
+                case 0:
+                    loopSelectCupIceCream = false;
+                    break;
+                default:
+                    System.out.println("Вы не выбрали ни один вариант");
+                    break;
+            }
+        }
         boolean loopSelectCreamType = true;
         while (loopSelectCreamType) {
 
@@ -142,17 +159,15 @@ public class Main {
                     default:
 
                 }
-
-
-                System.out.println(standartIceCream.getTopping());
             } catch (ToppingException e) {
                 System.out.println(e.getMessage());
                 loopSelectToppings = false;
             }
         }
-
-        System.out.println(standartIceCream.fullPrice());
-
-
+        System.out.println("Вы выбрали мороженное: \n" +
+                "Eмкость - " + standartIceCream.getCupType() + "\n" +
+                "Mороженное - " + standartIceCream.getIceCreamType() + "\n" +
+                "Топпинг - " + standartIceCream.getTopping());
+        System.out.println("Сумма покупки составляет " + standartIceCream.fullPrice());
     }
 }

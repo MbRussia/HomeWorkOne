@@ -4,7 +4,6 @@ public enum ToppingType {
     NUT, CHOCOLATE, FRUCTS;
 
     public int getPrice() {
-        System.out.println(this);
         switch (this) {
             case CHOCOLATE:
                 return 25;
