@@ -1,8 +1,6 @@
 package com.company;
 
-import com.company.ice_cream_shop.StandartIceCream;
-import com.company.ice_cream_shop.SurpriseIceCream;
-import com.company.ice_cream_shop.TextOutput;
+import com.company.ice_cream_shop.*;
 import com.company.ice_cream_shop.exceptions.ToppingException;
 import com.company.ice_cream_shop.topping.CupType;
 import com.company.ice_cream_shop.topping.IceCreamType;
@@ -18,35 +16,6 @@ public class Main {
     private static Scanner scn = new Scanner(System.in);
     private static boolean loop = true;
 
-    private static String getData(String message) {
-        System.out.println(message);
-        return scn.nextLine();
-    }
-
-    private static int getIntData(String message) {
-        System.out.println(message);
-
-        int i = -1;
-
-        try {
-            i = scn.nextInt();
-        } catch (InputMismatchException e) {
-            System.out.println("Неправильный формат ввода!");
-        }
-
-        scn.nextLine();
-        return i;
-    }
-
-    private static String getCupTypes() {
-        StringBuilder cupTypes = new StringBuilder();
-
-        for (CupType type : CupType.values()) {
-            cupTypes.append(type.name()).append("\n");
-        }
-
-        return cupTypes.toString();
-    }
 
     public static void main(String[] args) throws ToppingException {
 
@@ -129,7 +98,10 @@ public class Main {
     }
 
     private static void createExtraIceCream() {
+        ExtraIceCream extraIceCream = new ExtraIceCream();
 
+        selectCupType(extraIceCream);
+        selectCreamType(extraIceCream);
     }
 
 
@@ -137,52 +109,10 @@ public class Main {
         int input;
 
         StandartIceCream standartIceCream = new StandartIceCream();
-        boolean loopSelectCupIceCream = true;
-        while (loopSelectCupIceCream) {
-            input = getIntData("Выберите емкость из списка: \n" +
-                    "1 - Стаканчик\n" +
-                    "2 - Рожок\n" +
-                    "0 - Выход");
-            switch (input) {
-                case 1:
-                    standartIceCream.setCupType(CupType.CUP);
-                    loopSelectCupIceCream = false;
-                    break;
-                case 2:
-                    standartIceCream.setCupType(CupType.HORN);
-                    loopSelectCupIceCream = false;
-                    break;
-                case 0:
-                    loopSelectCupIceCream = false;
-                    break;
-                default:
-                    System.out.println("Вы не выбрали ни один вариант");
-                    break;
-            }
-        }
-        boolean loopSelectCreamType = true;
-        while (loopSelectCreamType) {
 
-            input = getIntData("Какой тип мороженного ?\n 1 - Ванильное \n 2 - Шоколадное \n 0 - Выход");
+        selectCupType(standartIceCream);
+        selectCreamType(standartIceCream);
 
-            switch (input) {
-                case 1:
-                    standartIceCream.setIceCreamType(IceCreamType.CREAMY);
-                    loopSelectCreamType = false;
-                    break;
-                case 2:
-                    standartIceCream.setIceCreamType(IceCreamType.CHOCOLATE);
-                    loopSelectCreamType = false;
-                    break;
-                case 0:
-                    loopSelectCreamType = false;
-                    break;
-                default:
-                    System.out.println("Не правильное значение");
-                    break;
-
-            }
-        }
 
         boolean loopSelectToppings = true;
         while (loopSelectToppings) {
@@ -214,5 +144,73 @@ public class Main {
                 "Mороженное - " + standartIceCream.getIceCreamType() + "\n" +
                 "Топпинг - " + standartIceCream.getTopping());
         System.out.println("Сумма покупки составляет " + standartIceCream.fullPrice());
+    }
+
+
+    private static void selectCupType(IceCreamAbstract iceCream) {
+        boolean loopSelectCupIceCream = true;
+        while (loopSelectCupIceCream) {
+            int input = getIntData("Выберите емкость из списка: \n" +
+                    "1 - Стаканчик\n" +
+                    "2 - Рожок\n" +
+                    "0 - Выход");
+            switch (input) {
+                case 1:
+                    iceCream.setCupType(CupType.CUP);
+                    loopSelectCupIceCream = false;
+                    break;
+                case 2:
+                    iceCream.setCupType(CupType.HORN);
+                    loopSelectCupIceCream = false;
+                    break;
+                case 0:
+                    loopSelectCupIceCream = false;
+                    break;
+                default:
+                    System.out.println("Вы не выбрали ни один вариант");
+                    break;
+            }
+        }
+    }
+
+    private static void selectCreamType(IceCreamAbstract iceCream) {
+        boolean loopSelectCreamType = true;
+        while (loopSelectCreamType) {
+
+            int input = getIntData("Какой тип мороженного ?\n 1 - Ванильное \n 2 - Шоколадное \n 0 - Выход");
+
+            switch (input) {
+                case 1:
+                    iceCream.setIceCreamType(IceCreamType.CREAMY);
+                    loopSelectCreamType = false;
+                    break;
+                case 2:
+                    iceCream.setIceCreamType(IceCreamType.CHOCOLATE);
+                    loopSelectCreamType = false;
+                    break;
+                case 0:
+                    loopSelectCreamType = false;
+                    break;
+                default:
+                    System.out.println("Не правильное значение");
+                    break;
+
+            }
+        }
+    }
+
+    private static int getIntData(String message) {
+        System.out.println(message);
+
+        int i = -1;
+
+        try {
+            i = scn.nextInt();
+        } catch (InputMismatchException e) {
+            System.out.println("Неправильный формат ввода!");
+        }
+
+        scn.nextLine();
+        return i;
     }
 }
