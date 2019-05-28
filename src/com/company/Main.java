@@ -90,6 +90,8 @@ public class Main {
             }
             toppingTypeRandom++;
         }
+
+//        вынести в отдельный метод и переиспользовать
         System.out.println("Вы выбрали мороженное: \n" +
                 "Eмкость - " + surpriseIceCream.getCupType() + "\n" +
                 "Mороженное - " + surpriseIceCream.getIceCreamType() + "\n" +
@@ -102,6 +104,8 @@ public class Main {
 
         selectCupType(extraIceCream);
         selectCreamType(extraIceCream);
+
+
     }
 
 
