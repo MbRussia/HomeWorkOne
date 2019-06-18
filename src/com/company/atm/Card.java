@@ -7,20 +7,22 @@ public class Card {
     private int pin;
 
 
-    public Card(int numberCard, String clientName) {
+    public Card(int numberCard) {
         this.numberCard = numberCard;
-        this.clientName = clientName;
     }
 
-    public Card(int cash, int numberCard, int pin, String clientName) {
+    public Card(int cash, int numberCard, int pin) {
         this.cash = cash;
         this.numberCard = numberCard;
         this.pin = pin;
-        this.clientName = clientName;
     }
 
     public String getClientName() {
         return clientName;
+    }
+
+    public void setClientName(String clientName) {
+        this.clientName = clientName;
     }
 
     public int getCash() {

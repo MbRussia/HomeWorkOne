@@ -2,23 +2,19 @@ package com.company.atm;
 
 import com.company.atm.exceptions.DuplicateCardExceptions;
 import com.company.atm.exceptions.DuplicateUserExceptions;
+import com.company.atm.exceptions.IncorrectPinExceptions;
 import com.company.atm.exceptions.NotFoundCardExceptions;
 
 import java.util.ArrayList;
 
 public class TerminalImpl implements Terminal {
     private ArrayList<Client> clients = new ArrayList<>();
-    private ArrayList<Card> cards = new ArrayList<>();
-
+    private Card currentCard;
+    private Client currentClient;
 
     @Override
-    public int getCash(int numberCard) throws NotFoundCardExceptions {
-        for (Card card : cards) {
-            if (numberCard == card.getNumberCard()) {
-                return card.getCash();
-            }
-        }
-        throw new NotFoundCardExceptions();
+    public int getCash() {
+        return currentCard.getCash();
     }
 
     @Override
@@ -38,21 +34,32 @@ public class TerminalImpl implements Terminal {
 
     @Override
     public void cardInsert(Card card) throws DuplicateCardExceptions {
-        for (Card crd : cards) {
-            if (crd.getNumberCard() == card.getNumberCard()) {
-                throw new DuplicateCardExceptions();
+        for (Client cl : clients) {
+            for (Card crd : cl.getCards()) {
+                if (crd.getNumberCard() == card.getNumberCard()) {
+                    throw new DuplicateCardExceptions();
+                }
             }
-
         }
-        cards.add(card);
+
+        currentClient.addCard(card);
     }
 
-    public boolean checkPinCard(int numberCard, int pin) throws NotFoundCardExceptions {
-        for (Card crd : cards) {
-            if (crd.getNumberCard() == numberCard && crd.getPin() == pin) {
-                return true;
+    public boolean checkPinCard(int numberCard, int pin) throws NotFoundCardExceptions, IncorrectPinExceptions {
+        for (Client cl : clients) {
+            for (Card crd : cl.getCards()) {
+                if (crd.getNumberCard() == numberCard) {
+                    if (crd.getPin() == pin) {
+                        currentClient = cl;
+                        currentCard = crd;
+                        return true;
+                    } else {
+                        throw new IncorrectPinExceptions();
+                    }
+                }
             }
         }
+
         throw new NotFoundCardExceptions();
     }
 
@@ -60,7 +67,6 @@ public class TerminalImpl implements Terminal {
     public String toString() {
         return "TerminalImpl{" +
                 "clients=" + clients +
-                ", cards=" + cards +
                 '}';
     }
 }

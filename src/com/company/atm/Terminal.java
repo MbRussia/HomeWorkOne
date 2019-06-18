@@ -5,7 +5,7 @@ import com.company.atm.exceptions.DuplicateUserExceptions;
 import com.company.atm.exceptions.NotFoundCardExceptions;
 
 public interface Terminal {
-    int getCash(int numberCard) throws NotFoundCardExceptions;
+    int getCash() throws NotFoundCardExceptions;
 
     void transaction(int transaction, int numberCard);
 

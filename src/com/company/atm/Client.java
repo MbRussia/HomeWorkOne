@@ -1,8 +1,11 @@
 package com.company.atm;
 
+import java.util.ArrayList;
+
 public class Client {
     private int age;
     private String name;
+    private ArrayList<Card> cards = new ArrayList<>();
 
     public Client(int age, String name) {
         this.age = age;
@@ -27,6 +30,14 @@ public class Client {
         this.name = name;
     }
 
+    public ArrayList<Card> getCards() {
+        return cards;
+    }
+
+    public void addCard(Card card) {
+        card.setClientName(name);
+        cards.add(card);
+    }
 
     @Override
     public String toString() {
