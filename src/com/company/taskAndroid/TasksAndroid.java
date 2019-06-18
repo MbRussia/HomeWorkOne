@@ -1,4 +1,4 @@
-package com.company;
+package com.company.taskAndroid;
 
 import java.util.Arrays;
 import java.util.Random;
