@@ -18,5 +18,5 @@ public interface Terminal {
 
     boolean deleteClient();
 
-    void createcard();
+    void createСard();
 }

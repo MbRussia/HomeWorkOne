@@ -36,7 +36,7 @@ public class Transaction {
                         scn.nextLine();
                         switch (inputSelect) {
                             case 1:
-                                terminal.createcard();
+                                terminal.createСard();
                                 System.out.println(terminal.toString());
                                 break;
                             case 2:

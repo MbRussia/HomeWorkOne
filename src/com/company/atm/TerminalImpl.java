@@ -87,7 +87,7 @@ public class TerminalImpl implements Terminal {
     }
 
     @Override
-    public void createcard() {
+    public void createСard() {
         Random rnd = new Random();
         Card card = new Card(rnd.nextInt(10000), rnd.nextInt(1000), client.getName(), 0, rnd.nextInt(999));
         cards.add(card);
