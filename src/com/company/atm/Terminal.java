@@ -2,15 +2,21 @@ package com.company.atm;
 
 import com.company.atm.exceptions.DuplicateCardExceptions;
 import com.company.atm.exceptions.DuplicateUserExceptions;
+import com.company.atm.exceptions.NoMoneyExceptions;
 import com.company.atm.exceptions.NotFoundCardExceptions;
 
 public interface Terminal {
-    int getCash(int numberCard) throws NotFoundCardExceptions;
+    int getCash() throws NotFoundCardExceptions;
 
-    void transaction(int transaction, int numberCard);
+    int transaction(int transaction) throws NoMoneyExceptions;
 
-    void clientInsert(Client client) throws DuplicateUserExceptions;
+    boolean clientInsert(Client client) throws DuplicateUserExceptions;
 
-    void cardInsert(Card card) throws DuplicateCardExceptions;
+    boolean cardInsert(Card card) throws DuplicateCardExceptions;
 
+    boolean deleteCard();
+
+    boolean deleteClient();
+
+    void createcard();
 }

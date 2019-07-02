@@ -1,66 +1,130 @@
 package com.company.atm;
 
-import com.company.atm.exceptions.DuplicateCardExceptions;
-import com.company.atm.exceptions.DuplicateUserExceptions;
-import com.company.atm.exceptions.NotFoundCardExceptions;
+import com.company.atm.exceptions.*;
 
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Random;
 
 public class TerminalImpl implements Terminal {
-    private ArrayList<Client> clients = new ArrayList<>();
+    private String address;
+    private String timeWork;
+    private int id;
     private ArrayList<Card> cards = new ArrayList<>();
+    private ArrayList<Client> clients = new ArrayList<>();
+    private Card card;
+    private Client client;
 
 
     @Override
-    public int getCash(int numberCard) throws NotFoundCardExceptions {
-        for (Card card : cards) {
-            if (numberCard == card.getNumberCard()) {
-                return card.getCash();
-            }
+    public int getCash() throws NotFoundCardExceptions {
+        if (card == null) {
+            throw new NotFoundCardExceptions();
+        } else {
+            return card.getCash();
         }
-        throw new NotFoundCardExceptions();
+    }
+
+
+    @Override
+    public int transaction(int transaction) throws NoMoneyExceptions {
+        if ((card.getCash() + transaction) <= 0) {
+            throw new NoMoneyExceptions();
+        } else {
+            card.setCash(card.getCash() + transaction);
+        }
+        return card.getCash();
     }
 
     @Override
-    public void transaction(int transaction, int numberCard) {
-
-    }
-
-    @Override
-    public void clientInsert(Client client) throws DuplicateUserExceptions {
-        for (Client clientInsert : clients) {
-            if (clientInsert.getName().equals(client.getName())) {
+    public boolean clientInsert(Client client) throws DuplicateUserExceptions {
+        if (clients.size() == 0) {
+            clients.add(client);
+            return true;
+        }
+        for (int i = 0; i < clients.size(); i++) {
+            if (!client.getName().equals(clients.get(i).getName())) {
+                clients.add(client);
+                return true;
+            } else {
                 throw new DuplicateUserExceptions();
             }
         }
-        clients.add(client);
+        return false;
     }
 
     @Override
-    public void cardInsert(Card card) throws DuplicateCardExceptions {
-        for (Card crd : cards) {
-            if (crd.getNumberCard() == card.getNumberCard()) {
+    public boolean cardInsert(Card card) throws DuplicateCardExceptions {
+        if (cards.size() == 0) {
+            cards.add(card);
+            return true;
+        }
+        for (int i = 0; i < cards.size(); i++) {
+            if (card.getNumber() == cards.get(i).getNumber()) {
+                cards.add(card);
+                return true;
+            } else {
                 throw new DuplicateCardExceptions();
             }
-
         }
+        return false;
+    }
+
+    @Override
+    public boolean deleteCard() {
+        return cards.remove(card);
+    }
+
+    @Override
+    public boolean deleteClient() {
+        Iterator<Card> iterator = cards.iterator();
+        while (iterator.hasNext()) {
+            if (iterator.next().getNameClient().equals(client.getName())) {
+                iterator.remove();
+            }
+        }
+        return clients.remove(client);
+    }
+
+    @Override
+    public void createcard() {
+        Random rnd = new Random();
+        Card card = new Card(rnd.nextInt(10000), rnd.nextInt(1000), client.getName(), 0, rnd.nextInt(999));
         cards.add(card);
     }
 
-    public boolean checkPinCard(int numberCard, int pin) throws NotFoundCardExceptions {
-        for (Card crd : cards) {
-            if (crd.getNumberCard() == numberCard && crd.getPin() == pin) {
-                return true;
+    public boolean checkPin(int numberCard, int pin) throws NotFoundCardExceptions, IncorrectPinExceptions {
+        for (int i = 0; i < cards.size(); i++) {
+            Card getCard = cards.get(i);
+            if (getCard.getNumber() == numberCard) {
+                if (getCard.getPin() == pin) {
+                    card = getCard;
+                    for (int j = 0; j < clients.size(); j++) {
+                        if (card.getNameClient().equals(clients.get(j).getName())) {
+                            client = clients.get(j);
+                        }
+                    }
+                    return true;
+                } else {
+                    throw new IncorrectPinExceptions();
+                }
+
+            } else {
+                throw new NotFoundCardExceptions();
             }
         }
-        throw new NotFoundCardExceptions();
+
+        return false;
     }
 
     @Override
     public String toString() {
         return "TerminalImpl{" +
-                "clients=" + clients +
+                "address='" + address + '\'' +
+                ", timeWork='" + timeWork + '\'' +
+                ", id=" + id +
                 ", cards=" + cards +
+                ", clients=" + clients +
                 '}';
     }
 }
